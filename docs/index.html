@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Roberto Álvarez">
+
+<title>Cómo crear un repositorio de Github</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="How_to_create_a_Repo_R_Github_files/libs/clipboard/clipboard.min.js"></script>
+<script src="How_to_create_a_Repo_R_Github_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="How_to_create_a_Repo_R_Github_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="How_to_create_a_Repo_R_Github_files/libs/quarto-html/popper.min.js"></script>
+<script src="How_to_create_a_Repo_R_Github_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="How_to_create_a_Repo_R_Github_files/libs/quarto-html/anchor.min.js"></script>
+<link href="How_to_create_a_Repo_R_Github_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="How_to_create_a_Repo_R_Github_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="How_to_create_a_Repo_R_Github_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="How_to_create_a_Repo_R_Github_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="How_to_create_a_Repo_R_Github_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul class="collapse">
+  <li><a href="#git-y-github" id="toc-git-y-github" class="nav-link active" data-scroll-target="#git-y-github"><span class="header-section-number">1</span> Git y Github</a></li>
+  <li><a href="#clonar-un-repositorio-remoto-en-r-desde-github" id="toc-clonar-un-repositorio-remoto-en-r-desde-github" class="nav-link" data-scroll-target="#clonar-un-repositorio-remoto-en-r-desde-github"><span class="header-section-number">2</span> Clonar un repositorio remoto en R desde GitHub</a></li>
+  <li><a href="#crear-un-repositorio-directamente-en-tu-equipo" id="toc-crear-un-repositorio-directamente-en-tu-equipo" class="nav-link" data-scroll-target="#crear-un-repositorio-directamente-en-tu-equipo"><span class="header-section-number">3</span> Crear un repositorio directamente en tu equipo</a></li>
+  <li><a href="#configurar-r-para-conectarse-sin-problemas-con-github" id="toc-configurar-r-para-conectarse-sin-problemas-con-github" class="nav-link" data-scroll-target="#configurar-r-para-conectarse-sin-problemas-con-github"><span class="header-section-number">4</span> Configurar R para conectarse sin problemas con <code class="ancla-seccion-3">GitHub</code></a></li>
+  <li><a href="#subir-tu-proyecto-local-a-un-repositorio-remoto" id="toc-subir-tu-proyecto-local-a-un-repositorio-remoto" class="nav-link" data-scroll-target="#subir-tu-proyecto-local-a-un-repositorio-remoto"><span class="header-section-number">5</span> Subir tu proyecto local a un repositorio remoto</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Cómo crear un repositorio de Github</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Creado por </div>
+    <div class="quarto-title-meta-contents">
+             <p>Roberto Álvarez </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">1 de enero de 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="git-y-github" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="git-y-github"><span class="header-section-number">1</span> Git y Github</h2>
+<p><strong>Git</strong> es un sistema de control de versiones que permite a lxs desarrolladorxs rastrear cambios en su código a lo largo del tiempo. <strong>GitHub</strong> es una plataforma basada en la web que utiliza Git para alojar repositorios de código, facilitando la colaboración entre desarrolladorxs.</p>
+<p>En este tutorial vamos a explorar, paso a paso, las tareas esenciales para trabajar con <strong>Git</strong> y <strong>GitHub</strong> desde <strong>R</strong>. Veremos cómo:</p>
+<ol type="1">
+<li><a href="#ancla-seccion-1">Clonar un repositorio de remoto en R desde GitHub</a></li>
+<li><a href="#ancla-seccion-2">Crear un repositorio directamente en tu equipo</a></li>
+<li><a href="#ancla-seccion-3">Configurar R para conectarse sin problemas con GitHub</a></li>
+<li><a href="#ancla-seccion-4">Subir tu proyecto local a un repositorio remoto</a></li>
+</ol>
+<p>La idea es que al final puedas manejar sin dificultad el flujo básico de trabajo entre RStudio, Git y GitHub.</p>
+</section>
+<section id="clonar-un-repositorio-remoto-en-r-desde-github" class="level2 ancla-seccion-1" data-number="2">
+<h2 class="ancla-seccion-1 anchored" data-number="2" data-anchor-id="clonar-un-repositorio-remoto-en-r-desde-github"><span class="header-section-number">2</span> Clonar un repositorio remoto en R desde GitHub</h2>
+<p><strong>Clonar</strong> un repositorio significa <strong>copiar a tu computadora todo el proyecto tal como está alojado en GitHub</strong>: sus carpetas, código, datos, documentación y cualquier otro archivo. Es el primer paso para poder ejecutar el código localmente, hacer cambios o usarlo como base para tu propio trabajo.</p>
+<p>Este proceso es muy común en análisis de datos, cursos de programación o proyectos colaborativos. De hecho, muchos repositorios de clase, talleres, proyectos de investigación o ejemplos en R están disponibles públicamente en <code>GitHub</code> y pueden ser clonados libremente.</p>
+<p>Por ejemplo, en mi perfil de <a href="https://github.com/robertoalvarezm">GitHub</a> hay varios repositorios públicos con análisis y scripts en R que puedes descargar y usar.</p>
+<p>Para clonar un repositorio desde <code>GitHub</code> solo necesitas tener <strong>RStudio</strong> instalado y una conexión a internet.</p>
+<section id="paso-1-entra-al-repositorio-en-github" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="paso-1-entra-al-repositorio-en-github"><span class="header-section-number">2.1</span> <strong>Paso 1: Entra al repositorio en GitHub</strong></h3>
+<p>Navega al repositorio que quieres clonar.<br>
+Una vez dentro, ubica un botón verde que dice <strong>Code</strong> y haz clic en él.</p>
+<p>Se abrirá un menú con varias opciones. La que necesitamos es la que aparece arriba del texto <em>“Clone using the web URL”</em>.<br>
+Ahí verás un enlace del tipo:</p>
+<pre class="text"><code>https://github.com/usuario/repositorio.git</code></pre>
+<p>Copia esa dirección, porque la usaremos enseguida en RStudio.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Github_repo.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="paso-2-abre-rstudio-y-selecciona-version-control" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="paso-2-abre-rstudio-y-selecciona-version-control"><span class="header-section-number">2.2</span> <strong>Paso 2: Abre RStudio y selecciona Version Control</strong></h3>
+<p>En RStudio ve a:</p>
+<pre><code>File → New Project → Version Control → Git</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Project_Version_Control.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Selecciona Git y se abrirá una nueva ventana.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Git.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Aparecerá una ventana con un campo llamado <strong>Repository URL.</strong> Pega ahí la liga que copiaste desde GitHub.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Clone_Github.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>RStudio rellenará automáticamente el nombre del proyecto y te permitirá elegir la carpeta donde quieres guardar la copia local del repositorio.</p>
+</section>
+<section id="paso-3-elige-la-ubicación-en-tu-computadora" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="paso-3-elige-la-ubicación-en-tu-computadora"><span class="header-section-number">2.3</span> <strong>Paso 3: Elige la ubicación en tu computadora</strong></h3>
+<p>Selecciona una carpeta donde quieras que viva tu proyecto. Por ejemplo, podrías tener algo como:</p>
+<pre><code>/Documentos/Rprojects/ </code></pre>
+<p>Cuando estés conforme con la ruta, haz clic en <code>Create Project</code>. En ese momento, <code>RStudio</code> descargará (clonará) todo el contenido del repositorio y lo abrirá como un proyecto completo, listo para usarse.</p>
+</section>
+<section id="paso-4-revisa-el-repositorio-local-en-rstudio" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="paso-4-revisa-el-repositorio-local-en-rstudio"><span class="header-section-number">2.4</span> <strong>Paso 4: Revisa el repositorio local en RStudio</strong></h3>
+<p>Una vez clonado, en el panel de archivos de <code>RStudio</code> verás todo lo que el repositorio contenía en <code>GitHub</code>: scripts <code>.R</code>, archivos <code>.Rmd</code> o <code>.qmd</code>, datos, carpetas, imágenes, etc. Además, aparecerá la pestaña <code>Git</code>, donde podrás:</p>
+<ul>
+<li>Ver qué archivos han cambiado</li>
+<li>Registrar cambios (<em>commits</em>)</li>
+<li>Sincronizar con <code>GitHub</code> (<em>pull/push</em>)</li>
+</ul>
+<p><strong>¿Qué puedes hacer ahora que ya lo clonaste?</strong></p>
+<p>Al tener una copia local del repositorio, puedes:</p>
+<ol type="1">
+<li>Ejecutar el código tal como está Modificarlo y guardar tus propias versiones</li>
+<li>Crear ramas (<em>branches</em>) para experimentar sin romper la versión principal</li>
+<li>Contribuir al proyecto original haciendo <em>pull requests</em></li>
+<li>Usarlo como plantilla o punto de partida para tus propios análisis</li>
+</ol>
+<p>Clonar es el punto de entrada para aprovechar el ecosistema colaborativo de <code>GitHub</code> desde <code>RStudio</code>.</p>
+</section>
+</section>
+<section id="crear-un-repositorio-directamente-en-tu-equipo" class="level2 ancla-seccion-2" data-number="3">
+<h2 class="ancla-seccion-2 anchored" data-number="3" data-anchor-id="crear-un-repositorio-directamente-en-tu-equipo"><span class="header-section-number">3</span> Crear un repositorio directamente en tu equipo</h2>
+<p>Cuando trabajas en un proyecto de análisis, modelado o procesamiento de datos en <code>R</code>, necesitas una forma ordenada de respaldar tu progreso y registrar los cambios que realizas. Para eso sirve <code>Git</code> : te permite llevar un control de versiones de tu proyecto, volver atrás cuando algo falla, recuperar archivos borrados y documentar tu avance de forma natural.</p>
+<p>A continuación aprenderás a configurar un repositorio local usando <code>Git</code>, <code>RStudio</code> y el paquete <code>{usethis}</code>.</p>
+<section id="instalar-git" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="instalar-git"><span class="header-section-number">3.1</span> <strong>Instalar <code>Git</code></strong></h3>
+<p>Lo primero es asegurarte de que tu computadora tiene <code>Git</code> instalado.<br>
+En muchos sistemas ya viene incluido. En caso contrario, descárgalo desde:</p>
+<ul>
+<li><a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></li>
+</ul>
+</section>
+<section id="instalar-el-paquete-usethis" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="instalar-el-paquete-usethis"><span class="header-section-number">3.2</span> <strong>Instalar el paquete <code>{usethis}</code></strong></h3>
+<p>El paquete <code>{usethis}</code> facilita muchas tareas que normalmente serían manuales y tediosas al configurar <code>Git</code> y <code>GitHub</code> desde <code>R</code>.</p>
+<p>Instálalo con:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"usethis"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="crear-un-repositorio-local" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="crear-un-repositorio-local"><span class="header-section-number">3.3</span> Crear un repositorio local</h3>
+<p>Antes de inicializar <code>Git</code>, tu proyecto debe estar dentro de un RStudio Project.</p>
+<p>Si aún no es así, crea uno desde:</p>
+<div class="cell">
+<pre class="text cell-code"><code>File → New Project → Existing Directory</code></pre>
+</div>
+<p>o</p>
+<div class="cell">
+<pre class="text cell-code"><code>File → New Project → New Directory</code></pre>
+</div>
+<p>Una vez adentro del proyecto, ejecuta:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_git</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>R</code> te preguntará si deseas hacer un primer <em>commit</em>. Un <em>commit</em> es una confirmación del estado actual de tu proyecto: guarda todos los archivos tal como están en ese momento. Este <em>commit</em> inicial marca el punto de partida del repositorio.</p>
+<section id="hacer-commits-conforme-avanzas" class="level4" data-number="3.3.1">
+<h4 data-number="3.3.1" class="anchored" data-anchor-id="hacer-commits-conforme-avanzas"><span class="header-section-number">3.3.1</span> Hacer commits conforme avanzas</h4>
+<p>Cada vez que modifiques tu código, agregues datos, crees funciones o avances en tu proyecto, conviene registrar ese progreso con un commit. Esto te permite mantener un historial claro y recuperable. Puedes hacer commits desde:</p>
+<ul>
+<li>El panel <code>Git</code> de<code>RStudio</code> (forma interactiva).</li>
+<li>La <code>Terminal</code>, usando comandos de <code>Git</code>.</li>
+</ul>
+<section id="hacer-commits-desde-el-panel-git-en-rstudio" class="level5" data-number="3.3.1.1">
+<h5 data-number="3.3.1.1" class="anchored" data-anchor-id="hacer-commits-desde-el-panel-git-en-rstudio"><span class="header-section-number">3.3.1.1</span> Hacer commits desde el panel <code>Git</code> en <code>RStudio</code></h5>
+<p>En la barra superior de <code>RStudio</code>, haz clic en el icono <code>Git</code> y selecciona <code>Commit</code>.</p>
+<p><img src="images/Clone_RStudio.png" class="img-fluid quarto-figure quarto-figure-center"> Se abrirá una ventana con:</p>
+<ol type="1">
+<li>Los archivos nuevos o modificados.</li>
+<li>Casillas para elegir qué archivos incluir (<em>stage</em>).</li>
+<li>Un cuadro para escribir el mensaje del <em>commit</em>.</li>
+<li>El botón <code>Commit</code> para confirmar los cambios.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Commit_RStudio.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>El mensaje debe describir claramente qué hiciste: te ayudará a identificar el commit más adelante.</p>
+</section>
+<section id="hacer-commits-desde-la-terminal" class="level5" data-number="3.3.1.2">
+<h5 data-number="3.3.1.2" class="anchored" data-anchor-id="hacer-commits-desde-la-terminal"><span class="header-section-number">3.3.1.2</span> Hacer commits desde la Terminal</h5>
+<p>En la pestaña Terminal de <code>RStudio</code>, puedes interactuar directamente con <code>Git</code>:</p>
+<p>Agregar todos los archivos nuevos o modificados al stage:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Crear el commit con un mensaje:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Descripción del cambio"</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Revisar el estado del repositorio:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Usar la Terminal es útil si quieres trabajar con Git de manera más profunda.</p>
+<p>Pega el token cuando te lo pida. Con esto, tu computadora queda autorizado para comunicarse con <code>GitHub</code>.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="configurar-r-para-conectarse-sin-problemas-con-github" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="configurar-r-para-conectarse-sin-problemas-con-github"><span class="header-section-number">4</span> Configurar R para conectarse sin problemas con <code class="ancla-seccion-3">GitHub</code></h2>
+<p>Finalmente, debes registrar tu nombre de usuario y correo asociado a <code>GitHub</code>. Esto asegura que tus commits tengan tu identidad y no aparezcan como “desconocidos”.</p>
+<p>En <code>R</code>, ejecuta:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_github_token</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Este comando abrirá una página de <code>GitHub</code> donde podrás generar un <strong>token personal</strong> de acceso. Un <strong>token</strong> funciona como una contraseña especial: es único, privado y mucho más seguro que usar tu clave real de <code>GitHub</code>, ya que permite autorizar tu computadora sin exponer tu contraseña.</p>
+<p>Una vez creado, copia el <strong>token</strong> inmediatamente. Solo podrás verlo esa vez, así que conviene usarlo en el siguiente paso sin demora.</p>
+<p>Luego, ejecuta:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>gitcreds<span class="sc">::</span><span class="fu">gitcreds_set</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Pega el token cuando te lo solicite. Con eso, tu computadora queda autorizada para conectarse a tu cuenta de GitHub.</p>
+<p>Finalmente, configura tu identidad en Git.</p>
+<p>Ejecuta:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_git_config</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">user.name =</span> <span class="st">"tu_usuario"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">user.email =</span> <span class="st">"tu_correo@ejemplo.com"</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Reemplaza <code>"tu_usuario"</code> y <code>"tu_correo@ejemplo.com"</code> con los datos de tu cuenta de <code>GitHub</code>.</p>
+<p>Con esto ya tienes un repositorio local completamente funcional y tu entorno configurado para trabajar con Git y GitHub desde R.</p>
+</section>
+<section id="subir-tu-proyecto-local-a-un-repositorio-remoto" class="level2 ancla-seccion-4" data-number="5">
+<h2 class="ancla-seccion-4 anchored" data-number="5" data-anchor-id="subir-tu-proyecto-local-a-un-repositorio-remoto"><span class="header-section-number">5</span> Subir tu proyecto local a un repositorio remoto</h2>
+<p>Si ya cuentas con un proyecto de RStudio que utiliza Git de forma local y quieres compartirlo en Internet, ya sea para respaldarlo o para que otras personas puedan consultarlo y reutilizarlo, puedes crear un repositorio remoto en GitHub. Este repositorio actuará como una copia vinculada a tu repositorio local: cada vez que actualices tu proyecto en tu computadora, podrás sincronizar esos cambios con GitHub, manteniendo ambas versiones alineadas.</p>
+<p>Para crear el repositorio remoto desde <code>RStudio</code>, simplemente ejecuta:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_github</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Este comando crea automáticamente un repositorio en tu cuenta de <code>GitHub</code>, lo conecta con tu repositorio local y sube todos los archivos y el historial de commits. Al finalizar, se abrirá en tu navegador la página del nuevo repositorio.</p>
+<p>Una vez publicado, puedes compartir el enlace para que otras personas visiten tu código, lo clonen en sus propias máquinas o colaboren contigo. Es buena práctica incluir un archivo <code>README.md</code> en tu proyecto, ya que aparecerá como la descripción principal del repositorio y ayuda a quienes lo visiten a entender su propósito y contenido.</p>
+<p>Ten en cuenta que los repositorios de <code>GitHub</code> son públicos por defecto. Si necesitas mantener tu código o datos en privado, puedes crear un repositorio privado ejecutando:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_github</span>(<span class="at">private =</span> <span class="cn">TRUE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Esto asegurará que solo tú y las personas que autorices puedan acceder al contenido del repositorio.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
